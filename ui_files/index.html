@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizPilot - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Role Switcher -->
+        <div class="role-switcher">
+            <button id="ownerBtn" class="role-btn active">Owner View</button>
+            <button id="staffBtn" class="role-btn">Staff View</button>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <div class="logo-section">
+                <div class="logo-icon">BP</div>
+                <h1 class="logo-text">BizPilot</h1>
+            </div>
+            <button id="mobileMenuBtn" class="menu-toggle">☰</button>
+        </div>
+
+        <div class="main-wrapper">
+            <!-- Sidebar Navigation -->
+            <aside id="sidebar" class="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo-icon">BP</div>
+                    <div class="sidebar-logo">
+                        <h2 class="logo-title">BizPilot</h2>
+                        <p id="userRoleDisplay" class="role-label">Owner</p>
+                    </div>
+                </div>
+
+                <nav class="navigation">
+                    <ul class="nav-list">
+                        <li>
+                            <button class="nav-item active" data-page="dashboard">
+                                <span class="icon">📊</span>
+                                <span class="text">Dashboard</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="nav-item" data-page="tasks">
+                                <span class="icon">✓</span>
+                                <span class="text">Tasks</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="nav-item" data-page="clients">
+                                <span class="icon">👥</span>
+                                <span class="text">Clients</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="nav-item" data-page="transactions">
+                                <span class="icon">💵</span>
+                                <span class="text">Transactions</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="nav-item" data-page="reports">
+                                <span class="icon">📈</span>
+                                <span class="text">Reports</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="nav-item" data-page="settings">
+                                <span class="icon">⚙️</span>
+                                <span class="text">Settings</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="user-details">
+                        <p id="userName" class="user-name">John Doe</p>
+                        <p id="userEmail" class="user-email">john@company.com</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Mobile Menu Overlay -->
+            <div id="mobileOverlay" class="mobile-overlay"></div>
+
+            <!-- Main Content -->
+            <main id="content" class="main-content">
+                <!-- Owner Dashboard -->
+                <section id="ownerDashboard" class="dashboard-section active">
+                    <div class="content-header">
+                        <h1>Owner Dashboard</h1>
+                        <p>Welcome back, John! Here's what's happening today.</p>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="action-btn btn-primary">+ Add Task</button>
+                        <button class="action-btn btn-success">+ Add Client</button>
+                        <button class="action-btn btn-purple">+ Add Transaction</button>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon">✓</span>
+                                <h3>Today's Tasks</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="todayTasksCount">4</div>
+                                <p class="stat-label">pending</p>
+                                <p class="stat-detail" id="completedTasksCount">0 completed today</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon">📅</span>
+                                <h3>Upcoming Follow-ups</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">3</div>
+                                <p class="stat-label">scheduled</p>
+                                <p class="stat-detail">Next: Tomorrow, 10:00 AM</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon">💵</span>
+                                <h3>Sales vs Expenses</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="finance-item">
+                                    <div class="finance-label">Sales</div>
+                                    <div class="finance-value text-success">↑ $24,500</div>
+                                </div>
+                                <div class="finance-item">
+                                    <div class="finance-label">Expenses</div>
+                                    <div class="finance-value text-danger">↓ $12,300</div>
+                                </div>
+                                <div class="finance-item border-top">
+                                    <div class="finance-label">Net</div>
+                                    <div class="finance-value">$12,200</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-grid">
+                        <!-- Task List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Task List</h2>
+                            </div>
+                            <div class="card-content">
+                                <ul id="ownerTaskList" class="task-list">
+                                    <li class="task-item">
+                                        <input type="checkbox" class="task-checkbox">
+                                        <div class="task-text">
+                                            <p class="task-title">Review Q4 financial reports</p>
+                                            <p class="task-time">2:00 PM</p>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Complete</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                    <li class="task-item">
+                                        <input type="checkbox" class="task-checkbox">
+                                        <div class="task-text">
+                                            <p class="task-title">Meeting with new client - Acme Corp</p>
+                                            <p class="task-time">3:30 PM</p>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Complete</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                    <li class="task-item">
+                                        <input type="checkbox" class="task-checkbox">
+                                        <div class="task-text">
+                                            <p class="task-title">Approve staff timesheets</p>
+                                            <p class="task-time">5:00 PM</p>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Complete</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                    <li class="task-item">
+                                        <input type="checkbox" class="task-checkbox">
+                                        <div class="task-text">
+                                            <p class="task-title">Update project proposals</p>
+                                            <p class="task-time">Tomorrow</p>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Complete</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Follow-ups -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Upcoming Follow-ups</h2>
+                            </div>
+                            <div class="card-content">
+                                <ul class="followup-list">
+                                    <li class="followup-item">
+                                        <div class="followup-info">
+                                            <p class="followup-client">Acme Corporation</p>
+                                            <p class="followup-type">Contract Review</p>
+                                            <p class="followup-date">📅 Tomorrow, 10:00 AM</p>
+                                        </div>
+                                        <button class="btn-outline">View</button>
+                                    </li>
+                                    <li class="followup-item">
+                                        <div class="followup-info">
+                                            <p class="followup-client">Tech Solutions Inc</p>
+                                            <p class="followup-type">Quarterly Check-in</p>
+                                            <p class="followup-date">📅 Jan 2, 2:00 PM</p>
+                                        </div>
+                                        <button class="btn-outline">View</button>
+                                    </li>
+                                    <li class="followup-item">
+                                        <div class="followup-info">
+                                            <p class="followup-client">Global Ventures</p>
+                                            <p class="followup-type">Project Kickoff</p>
+                                            <p class="followup-date">📅 Jan 5, 11:30 AM</p>
+                                        </div>
+                                        <button class="btn-outline">View</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Staff Dashboard (Tasks Page) -->
+                <section id="staffDashboard" class="dashboard-section">
+                    <div class="content-header">
+                        <h1>Dashboard</h1>
+                        <p>Manage your daily tasks and activities</p>
+                    </div>
+
+                    <div class="content-grid-full">
+                        <!-- Task Form -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Add New Task</h2>
+                            </div>
+                            <div class="card-content">
+                                <form id="taskForm" class="form">
+                                    <div class="form-group">
+                                        <label for="taskTitle">Task Title</label>
+                                        <input type="text" id="taskTitle" class="form-input" placeholder="Enter task title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taskDesc">Description</label>
+                                        <textarea id="taskDesc" class="form-input" placeholder="Enter task description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taskDate">Due Date</label>
+                                        <input type="date" id="taskDate" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taskPriority">Priority</label>
+                                        <select id="taskPriority" class="form-input">
+                                            <option value="low">Low</option>
+                                            <option value="medium" selected>Medium</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn-primary full-width">Add Task</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Tasks List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Tasks</h2>
+                            </div>
+                            <div class="card-content">
+                                <ul id="staffTaskList" class="task-detailed-list">
+                                    <li class="task-detailed-item">
+                                        <div class="task-detailed-header">
+                                            <input type="checkbox" class="task-checkbox">
+                                            <h4 class="task-title">Follow up with ABC Industries</h4>
+                                        </div>
+                                        <p class="task-description">Send contract proposal and schedule follow-up call</p>
+                                        <div class="task-meta">
+                                            <span class="priority-badge priority-high">High</span>
+                                            <span class="task-date">📅 2025-12-29</span>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Complete</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                    <li class="task-detailed-item">
+                                        <div class="task-detailed-header">
+                                            <input type="checkbox" class="task-checkbox">
+                                            <h4 class="task-title">Update client contact information</h4>
+                                        </div>
+                                        <p class="task-description">Review and update client database with recent changes</p>
+                                        <div class="task-meta">
+                                            <span class="priority-badge priority-medium">Medium</span>
+                                            <span class="task-date">📅 2025-12-30</span>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Complete</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                    <li class="task-detailed-item completed">
+                                        <div class="task-detailed-header">
+                                            <input type="checkbox" class="task-checkbox" checked>
+                                            <h4 class="task-title">Prepare monthly report</h4>
+                                        </div>
+                                        <p class="task-description">Compile sales data and create summary report</p>
+                                        <div class="task-meta">
+                                            <span class="priority-badge priority-high">High</span>
+                                            <span class="task-date">📅 2025-12-31</span>
+                                        </div>
+                                        <div class="task-actions">
+                                            <button class="btn-text">Undo</button>
+                                            <button class="btn-delete">🗑️</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Clients Page -->
+                <section id="clientsPage" class="dashboard-section">
+                    <div class="content-header">
+                        <h1>Clients</h1>
+                        <p>Manage your client relationships and contacts</p>
+                    </div>
+
+                    <div class="content-grid-full">
+                        <!-- Client Form -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Add New Client</h2>
+                            </div>
+                            <div class="card-content">
+                                <form id="clientForm" class="form">
+                                    <div class="form-group">
+                                        <label for="clientName">Client Name</label>
+                                        <input type="text" id="clientName" class="form-input" placeholder="Full name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clientCompany">Company</label>
+                                        <input type="text" id="clientCompany" class="form-input" placeholder="Company name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clientEmail">Email</label>
+                                        <input type="email" id="clientEmail" class="form-input" placeholder="Email address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clientPhone">Phone</label>
+                                        <input type="tel" id="clientPhone" class="form-input" placeholder="Phone number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clientAddress">Address</label>
+                                        <input type="text" id="clientAddress" class="form-input" placeholder="Street address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clientStatus">Status</label>
+                                        <select id="clientStatus" class="form-input">
+                                            <option value="prospect">Prospect</option>
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn-primary full-width">Add Client</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Clients List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Clients List</h2>
+                            </div>
+                            <div class="card-content">
+                                <div id="clientsList" class="clients-grid">
+                                    <div class="client-card">
+                                        <div class="client-header">
+                                            <h3>Michael Chen</h3>
+                                            <span class="status-badge status-active">Active</span>
+                                        </div>
+                                        <p class="client-company">🏢 Tech Solutions Inc</p>
+                                        <p class="client-detail">📧 michael@techsolutions.com</p>
+                                        <p class="client-detail">📞 (555) 123-4567</p>
+                                        <p class="client-detail">📍 123 Tech Street, San Francisco, CA</p>
+                                        <div class="client-actions">
+                                            <button class="btn-outline">Edit</button>
+                                            <button class="btn-delete">Delete</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="client-card">
+                                        <div class="client-header">
+                                            <h3>Sarah Williams</h3>
+                                            <span class="status-badge status-active">Active</span>
+                                        </div>
+                                        <p class="client-company">🏢 Global Ventures</p>
+                                        <p class="client-detail">📧 sarah@globalventures.com</p>
+                                        <p class="client-detail">📞 (555) 234-5678</p>
+                                        <p class="client-detail">📍 456 Business Ave, New York, NY</p>
+                                        <div class="client-actions">
+                                            <button class="btn-outline">Edit</button>
+                                            <button class="btn-delete">Delete</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="client-card">
+                                        <div class="client-header">
+                                            <h3>David Johnson</h3>
+                                            <span class="status-badge status-prospect">Prospect</span>
+                                        </div>
+                                        <p class="client-company">🏢 Acme Corporation</p>
+                                        <p class="client-detail">📧 david@acmecorp.com</p>
+                                        <p class="client-detail">📞 (555) 345-6789</p>
+                                        <p class="client-detail">📍 789 Corporate Blvd, Chicago, IL</p>
+                                        <div class="client-actions">
+                                            <button class="btn-outline">Edit</button>
+                                            <button class="btn-delete">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Page -->
+                <section id="transactionsPage" class="dashboard-section">
+                    <div class="content-header">
+                        <h1>Transactions</h1>
+                        <p>Track all your financial transactions</p>
+                    </div>
+
+                    <div class="content-grid-full">
+                        <!-- Add Transaction Form -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Add Transaction</h2>
+                            </div>
+                            <div class="card-content">
+                                <form id="transactionForm" class="form">
+                                    <div class="form-group">
+                                        <label for="transType">Type</label>
+                                        <select id="transType" class="form-input" required>
+                                            <option value="income">Income</option>
+                                            <option value="expense">Expense</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="transDesc">Description</label>
+                                        <input type="text" id="transDesc" class="form-input" placeholder="Transaction description" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="transAmount">Amount</label>
+                                        <input type="number" id="transAmount" class="form-input" placeholder="0.00" step="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="transDate">Date</label>
+                                        <input type="date" id="transDate" class="form-input" required>
+                                    </div>
+                                    <button type="submit" class="btn-primary full-width">Add Transaction</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Transactions List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Recent Transactions</h2>
+                            </div>
+                            <div class="card-content">
+                                <table id="transactionsTable" class="transactions-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Type</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Client Payment - ABC Industries</td>
+                                            <td><span class="badge-success">Income</span></td>
+                                            <td class="amount-income">+$5,000</td>
+                                            <td>2025-12-28</td>
+                                            <td><button class="btn-delete">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Office Supplies</td>
+                                            <td><span class="badge-danger">Expense</span></td>
+                                            <td class="amount-expense">-$245.50</td>
+                                            <td>2025-12-27</td>
+                                            <td><button class="btn-delete">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Software License Renewal</td>
+                                            <td><span class="badge-danger">Expense</span></td>
+                                            <td class="amount-expense">-$1,200</td>
+                                            <td>2025-12-26</td>
+                                            <td><button class="btn-delete">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reports Page -->
+                <section id="reportsPage" class="dashboard-section">
+                    <div class="content-header">
+                        <h1>Reports</h1>
+                        <p>View and generate business reports</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon">📈</span>
+                                <h3>Monthly Revenue</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">$45,230</div>
+                                <p class="stat-detail">↑ 12% from last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon">📉</span>
+                                <h3>Monthly Expenses</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">$18,450</div>
+                                <p class="stat-detail">↓ 5% from last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon">💰</span>
+                                <h3>Net Profit</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">$26,780</div>
+                                <p class="stat-detail">↑ 18% from last month</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Detailed Report</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="report-section">
+                                <h3>Summary</h3>
+                                <ul class="report-list">
+                                    <li>Total Revenue: <strong>$45,230</strong></li>
+                                    <li>Total Expenses: <strong>$18,450</strong></li>
+                                    <li>Net Profit: <strong>$26,780</strong></li>
+                                    <li>Profit Margin: <strong>59.2%</strong></li>
+                                </ul>
+                            </div>
+                            <div class="report-section">
+                                <h3>Top Clients</h3>
+                                <ul class="report-list">
+                                    <li>Tech Solutions Inc: <strong>$15,000</strong></li>
+                                    <li>Global Ventures: <strong>$12,500</strong></li>
+                                    <li>Acme Corporation: <strong>$8,000</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Page -->
+                <section id="settingsPage" class="dashboard-section">
+                    <div class="content-header">
+                        <h1>Settings</h1>
+                        <p>Manage your application settings</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Profile Settings</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="settings-group">
+                                <div class="form-group">
+                                    <label for="settingsName">Full Name</label>
+                                    <input type="text" id="settingsName" class="form-input" value="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingsEmail">Email Address</label>
+                                    <input type="email" id="settingsEmail" class="form-input" value="john@company.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingsPhone">Phone Number</label>
+                                    <input type="tel" id="settingsPhone" class="form-input" placeholder="(555) 000-0000">
+                                </div>
+                                <button class="btn-primary">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Notification Settings</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="settings-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="emailNotif" checked>
+                                    <label for="emailNotif">Email Notifications</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="taskNotif" checked>
+                                    <label for="taskNotif">Task Reminders</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="clientNotif" checked>
+                                    <label for="clientNotif">Client Updates</label>
+                                </div>
+                                <button class="btn-primary">Save Preferences</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Danger Zone</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="settings-group">
+                                <p style="color: #666; margin-bottom: 1rem;">Irreversible actions that cannot be undone.</p>
+                                <button class="btn-danger">Clear All Data</button>
+                                <button class="btn-danger">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
