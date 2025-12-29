@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizPilot — Owner Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 15px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Owner Dashboard</h1>
+
+    <div class="card">
+        <h2>Today's Tasks</h2>
+        <ul id="ownerTasks"></ul>
+    </div>
+
+    <div class="card">
+        <h2>Upcoming Follow-ups</h2>
+        <ul id="ownerClients"></ul>
+    </div>
+
+    <div class="card">
+        <h2>Sales vs Expenses</h2>
+        <div id="ownerSummary"></div>
+    </div>
+
+    <script>
+        const API = "http://localhost:5000";
+
+        async function loadOwnerTasks() {
+            const res = await fetch(`${API}/tasks`);
+            const data = await res.json();
+
+            const list = document.getElementById("ownerTasks");
+            list.innerHTML = "";
+
+            data.forEach(t => {
+                const li = document.createElement("li");
+
+                li.innerHTML = `
+      ${t.title} — <b>${t.status}</b>
+      <button onclick="ownerCompleteTask('${t.id}')">Complete</button>
+      <button onclick="ownerDeleteTask('${t.id}')">Delete</button>
+    `;
+
+                list.appendChild(li);
+            });
+        }
+
+        async function loadOwnerClients() {
+            const res = await fetch(`${API}/clients`);
+            const data = await res.json();
+
+            const list = document.getElementById("ownerClients");
+            list.innerHTML = "";
+
+            data.slice(0, 5).forEach(c => {
+                const li = document.createElement("li");
+                li.textContent = `${c.name} — ${c.phone}`;
+                list.appendChild(li);
+            });
+        }
+
+        async function loadSummary() {
+            const res = await fetch(`${API}/transactions`);
+            const data = await res.json();
+
+            let sales = 0, expenses = 0;
+            data.forEach(t => t.type === "sale" ? sales += Number(t.amount) : expenses += Number(t.amount));
+
+            document.getElementById("ownerSummary").innerText =
+                `Sales: ₹${sales} | Expenses: ₹${expenses}`;
+        }
+
+
+        // ...existing code...
+
+        async function ownerCompleteTask(id) {
+            await fetch(`${API}/tasks/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: "completed" })
+            });
+
+            loadOwnerTasks();
+        }
+
+        async function ownerDeleteTask(id) {
+            await fetch(`${API}/tasks/${id}`, {
+                method: "DELETE"
+            });
+
+            loadOwnerTasks();
+        }
+
+
+
+
+        loadOwnerTasks();
+        loadOwnerClients();
+        loadSummary();
+    </script>
+
+</body>
+
+
+</html>

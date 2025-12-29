@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1>BizPilot Dashboard</h1>
+
+  <!-- TASKS -->
+  <section>
+    <h2>Add Task</h2>
+    <input id="taskTitle" placeholder="Task title">
+    <button onclick="addTask()">Add</button>
+
+    <h3>Tasks List</h3>
+    <ul id="tasksList"></ul>
+  </section>
+
+  <hr>
+
+  <!-- CLIENTS -->
+  <section>
+    <h2>Add Client</h2>
+    <input id="clientName" placeholder="Client name">
+    <input id="clientPhone" placeholder="Phone">
+    <button onclick="addClient()">Add</button>
+
+    <h3>Clients List</h3>
+    <ul id="clientsList"></ul>
+  </section>
+
+  <hr>
+
+  <!-- TRANSACTIONS -->
+  <section>
+    <h2>Add Transaction</h2>
+    <input id="amount" placeholder="Amount">
+    <select id="type">
+      <option value="sale">Sale</option>
+      <option value="expense">Expense</option>
+    </select>
+    <button onclick="addTransaction()">Add</button>
+
+    <h3>Transactions</h3>
+    <ul id="transactionsList"></ul>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
