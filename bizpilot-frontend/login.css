@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background-color: rgb(248, 250, 252);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loginCard {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  max-width: 380px;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.appTitle {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: rgb(29, 40, 58);
+}
+
+.appSubtitle {
+  text-align: center;
+  color: rgb(100, 116, 139);
+  margin-bottom: 26px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  color: rgb(29, 40, 58);
+}
+
+.inputGroup input,
+.inputGroup select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgb(203, 213, 225);
+  font-size: 14px;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus {
+  outline: none;
+  border-color: rgb(29, 40, 58);
+}
+
+.loginBtn {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: rgb(29, 40, 58);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.loginBtn:hover {
+  opacity: 0.9;
+}
+
+.signupText {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: rgb(71, 85, 105);
+}
+
+.signupText a {
+  color: rgb(29, 40, 58);
+  font-weight: 600;
+  text-decoration: none;
+}
