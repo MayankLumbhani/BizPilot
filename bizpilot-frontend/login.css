@@ -48,6 +48,7 @@ body {
   gap: 16px;
 }
 
+
 .inputGroup {
   display: flex;
   flex-direction: column;
@@ -59,16 +60,14 @@ body {
   color: rgb(29, 40, 58);
 }
 
-.inputGroup input,
-.inputGroup select {
+.inputGroup input {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid rgb(203, 213, 225);
   font-size: 14px;
 }
 
-.inputGroup input:focus,
-.inputGroup select:focus {
+.inputGroup input:focus {
   outline: none;
   border-color: rgb(29, 40, 58);
 }
