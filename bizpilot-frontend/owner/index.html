@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owner - BizPilot</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Override layout for owner (no sidebar) */
+    .main-content { margin-left: 0; }
+    .container { display: block; }
+    .main-wrapper { display: block; }
+  </style>
+</head>
+<body>
+  <main id="content" class="main-content">
+    <!-- Owner Dashboard (owner-only page; sidebar removed, quick-actions removed) -->
+    <section id="ownerDashboard" class="dashboard-section active">
+      <div class="content-header">
+        <h1>Owner Dashboard</h1>
+        <p>Welcome back, John! Here's what's happening today.</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-icon">✓</span>
+            <h3>Today's Tasks</h3>
+          </div>
+          <div class="stat-content">
+            <div class="stat-number" id="todayTasksCount">0</div>
+            <p class="stat-label">pending</p>
+            <p class="stat-detail" id="completedTasksCount">0 completed today</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-icon">📅</span>
+            <h3>Upcoming Follow-ups</h3>
+          </div>
+          <div class="stat-content">
+            <div class="stat-number">3</div>
+            <p class="stat-label">scheduled</p>
+            <p class="stat-detail">Next: Tomorrow, 10:00 AM</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-icon">💵</span>
+            <h3>Sales vs Expenses</h3>
+          </div>
+          <div class="stat-content">
+            <div class="finance-item">
+              <div class="finance-label">Sales</div>
+              <div class="finance-value text-success">↑ $24,500</div>
+            </div>
+            <div class="finance-item">
+              <div class="finance-label">Expenses</div>
+              <div class="finance-value text-danger">↓ $12,300</div>
+            </div>
+            <div class="finance-item border-top">
+              <div class="finance-label">Net</div>
+              <div class="finance-value">$12,200</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <!-- Task List -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Task List</h2>
+          </div>
+          <div class="card-content">
+            <ul id="ownerTaskList" class="task-list">
+              <!-- Tasks rendered by owner/script.js -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Upcoming Follow-ups -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Upcoming Follow-ups</h2>
+          </div>
+          <div class="card-content">
+            <ul class="followup-list">
+              <li class="followup-item">
+                <div class="followup-info">
+                  <p class="followup-client">Acme Corporation</p>
+                  <p class="followup-type">Contract Review</p>
+                  <p class="followup-date">📅 Tomorrow, 10:00 AM</p>
+                </div>
+                <button class="btn-outline">View</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

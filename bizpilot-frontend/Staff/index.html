@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff - BizPilot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">BP</div>
+      <div class="sidebar-logo">
+        <h2 class="logo-title">BizPilot</h2>
+        <p id="userRoleDisplay" class="role-label">Staff</p>
+      </div>
+    </div>
+
+    <nav class="navigation">
+      <ul class="nav-list">
+        <li>
+          <button class="nav-item" data-page="dashboard">
+            <span class="icon">📊</span>
+            <span class="text">Dashboard</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="tasks">
+            <span class="icon">✓</span>
+            <span class="text">Tasks</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="clients">
+            <span class="icon">👥</span>
+            <span class="text">Clients</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="transactions">
+            <span class="icon">💵</span>
+            <span class="text">Transactions</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="reports">
+            <span class="icon">📈</span>
+            <span class="text">Reports</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="settings">
+            <span class="icon">⚙️</span>
+            <span class="text">Settings</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="user-info">
+      <div class="user-avatar" id="userAvatar">SM</div>
+      <div class="user-details">
+        <p id="userName" class="user-name">Sarah Miller</p>
+        <p id="userEmail" class="user-email">sarah@company.com</p>
+      </div>
+    </div>
+  </aside>
+
+  <main id="content" class="main-content">
+    <!-- Tasks Page -->
+    <section id="tasksPage" class="dashboard-section active">
+      <div class="content-grid-full" style="padding: 32px;">
+        <div class="card">
+          <div class="card-header">
+            <h2>Add New Task</h2>
+          </div>
+          <div class="card-content">
+            <form id="taskForm" class="form">
+              <div class="form-group">
+                <label for="taskTitle">Task Title</label>
+                <input type="text" id="taskTitle" class="form-input" placeholder="Enter task title" required>
+              </div>
+              <div class="form-group">
+                <label for="taskDesc">Description</label>
+                <textarea id="taskDesc" class="form-input" placeholder="Enter task description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="taskDate">Due Date</label>
+                <input type="date" id="taskDate" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="taskPriority">Priority</label>
+                <select id="taskPriority" class="form-input">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-primary full-width">Add Task</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Tasks</h2>
+          </div>
+          <div class="card-content">
+            <ul id="staffTaskList" class="task-detailed-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clients Page -->
+    <section id="clientsPage" class="dashboard-section">
+      <div class="content-header">
+        <h1>Clients</h1>
+        <p>Manage your client relationships and contacts</p>
+      </div>
+      <div class="content-grid-full" style="padding: 32px;">
+        <div class="card">
+          <div class="card-header"><h2>Add New Client</h2></div>
+          <div class="card-content">
+            <form id="clientForm" class="form">
+              <div class="form-group">
+                <label for="clientName">Client Name</label>
+                <input type="text" id="clientName" class="form-input" placeholder="Full name" required>
+              </div>
+              <div class="form-group">
+                <label for="clientCompany">Company</label>
+                <input type="text" id="clientCompany" class="form-input" placeholder="Company name" required>
+              </div>
+              <div class="form-group">
+                <label for="clientEmail">Email</label>
+                <input type="email" id="clientEmail" class="form-input" placeholder="Email address" required>
+              </div>
+              <div class="form-group">
+                <label for="clientPhone">Phone</label>
+                <input type="tel" id="clientPhone" class="form-input" placeholder="Phone number">
+              </div>
+              <div class="form-group">
+                <label for="clientAddress">Address</label>
+                <input type="text" id="clientAddress" class="form-input" placeholder="Street address">
+              </div>
+              <div class="form-group">
+                <label for="clientStatus">Status</label>
+                <select id="clientStatus" class="form-input">
+                  <option value="prospect">Prospect</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-primary full-width">Add Client</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>Clients List</h2></div>
+          <div class="card-content">
+            <div id="clientsList" class="clients-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transactions Page -->
+    <section id="transactionsPage" class="dashboard-section">
+      <div class="content-header">
+        <h1>Transactions</h1>
+        <p>Track all your financial transactions</p>
+      </div>
+      <div class="content-grid-full" style="padding: 32px;">
+        <div class="card">
+          <div class="card-header"><h2>Add Transaction</h2></div>
+          <div class="card-content">
+            <form id="transactionForm" class="form">
+              <div class="form-group">
+                <label for="transType">Type</label>
+                <select id="transType" class="form-input" required>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="transDesc">Description</label>
+                <input type="text" id="transDesc" class="form-input" placeholder="Transaction description" required>
+              </div>
+              <div class="form-group">
+                <label for="transAmount">Amount</label>
+                <input type="number" id="transAmount" class="form-input" placeholder="0.00" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label for="transDate">Date</label>
+                <input type="date" id="transDate" class="form-input" required>
+              </div>
+              <button type="submit" class="btn-primary full-width">Add Transaction</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>Recent Transactions</h2></div>
+          <div class="card-content">
+            <table id="transactionsTable" class="transactions-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reports Page -->
+    <section id="reportsPage" class="dashboard-section">
+      <div class="content-header">
+        <h1>Reports</h1>
+        <p>View and generate business reports</p>
+      </div>
+
+      <div class="stats-grid" style="padding: 0 32px;">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-icon">📈</span>
+            <h3>Monthly Revenue</h3>
+          </div>
+          <div class="stat-content">
+            <div class="stat-number" id="monthlyRevenueAmount">$45,230</div>
+            <p class="stat-detail">↑ 12% from last month</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-icon">📉</span>
+            <h3>Monthly Expenses</h3>
+          </div>
+          <div class="stat-content">
+            <div class="stat-number" id="monthlyExpenseAmount">$18,450</div>
+            <p class="stat-detail">↓ 5% from last month</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-icon">💰</span>
+            <h3>Net Profit</h3>
+          </div>
+          <div class="stat-content">
+            <div class="stat-number" id="netProfitAmount">$26,780</div>
+            <p class="stat-detail">↑ 18% from last month</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin: 32px;">
+        <div class="card-header">
+          <h2>Detailed Report</h2>
+        </div>
+        <div class="card-content">
+          <div class="report-section">
+            <h3>Summary</h3>
+            <ul class="report-list" id="reportSummary">
+              <li>Total Revenue: <strong id="totalRevenueReport">$45,230</strong></li>
+              <li>Total Expenses: <strong id="totalExpensesReport">$18,450</strong></li>
+              <li>Net Profit: <strong id="netProfitReport">$26,780</strong></li>
+              <li>Profit Margin: <strong id="profitMarginReport">59.2%</strong></li>
+            </ul>
+          </div>
+          <div class="report-section">
+            <h3>Top Clients</h3>
+            <ul class="report-list" id="topClientsReport">
+              <li>Tech Solutions Inc: <strong>$15,000</strong></li>
+              <li>Global Ventures: <strong>$12,500</strong></li>
+              <li>Acme Corporation: <strong>$8,000</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Page -->
+    <section id="settingsPage" class="dashboard-section">
+      <div class="content-header">
+        <h1>Settings</h1>
+        <p>Manage your application settings</p>
+      </div>
+
+      <div class="card" style="margin: 32px;">
+        <div class="card-header"><h2>Profile Settings</h2></div>
+        <div class="card-content">
+          <div class="settings-group">
+            <div class="form-group">
+              <label for="settingsName">Full Name</label>
+              <input type="text" id="settingsName" class="form-input" value="Sarah Miller">
+            </div>
+            <div class="form-group">
+              <label for="settingsEmail">Email Address</label>
+              <input type="email" id="settingsEmail" class="form-input" value="sarah@company.com">
+            </div>
+            <div class="form-group">
+              <label for="settingsPhone">Phone Number</label>
+              <input type="tel" id="settingsPhone" class="form-input" placeholder="(555) 000-0000">
+            </div>
+            <button class="btn-primary">Save Changes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin: 32px;">
+        <div class="card-header"><h2>Notification Settings</h2></div>
+        <div class="card-content">
+          <div class="settings-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="emailNotif" checked>
+              <label for="emailNotif">Email Notifications</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="taskNotif" checked>
+              <label for="taskNotif">Task Reminders</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="clientNotif" checked>
+              <label for="clientNotif">Client Updates</label>
+            </div>
+            <button class="btn-primary">Save Preferences</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin: 32px;">
+        <div class="card-header"><h2>Danger Zone</h2></div>
+        <div class="card-content">
+          <div class="settings-group">
+            <p style="color: #666; margin-bottom: 1rem;">Irreversible actions that cannot be undone.</p>
+            <button class="btn-danger">Clear All Data</button>
+            <button class="btn-danger">Delete Account</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
