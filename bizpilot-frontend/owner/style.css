@@ -19,7 +19,6 @@ body {
 	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
 		sans-serif;
-	background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 	color: #0f172a;
 	line-height: 1.6;
 	font-size: 14px;
@@ -97,7 +96,7 @@ ul, ol {
 	padding-bottom: 0;
 	margin-bottom: 24px;
 	position: relative;
-	padding-top: 0;
+	padding-top: 20px;
 }
 
 .content-header::before {
@@ -809,9 +808,9 @@ textarea.form-input {
 	align-items: center;
 	justify-content: space-between;
 	padding: 14px 28px;
-	background: #2A374A;
+	background: #FEFEFE;
 	border-radius: 12px;
-	box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	margin: 20px;
 }
 
@@ -829,18 +828,6 @@ textarea.form-input {
 	gap: 10px;
 	font-weight: 600;
 	font-size: 16px;
-}
-
-.logo-icon {
-	background: linear-gradient(135deg, #2563eb, #4f46e5);
-	color: #fff;
-	width: 32px;
-	height: 32px;
-	border-radius: 8px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 14px;
 }
 
 .logo-text {
@@ -882,7 +869,7 @@ textarea.form-input {
 
 /* Date */
 .date {
-	color: #b0b0b1;
+	color: #2A374A;
 	font-size: 13px;
 }
 
@@ -954,8 +941,9 @@ textarea.form-input {
 	transform: translateX(100%);
 }
 
-.logo-title {
-	font-size: 24px;
-	font-weight: 700;
-	color: #FDFDFE;
+
+.logo img {
+	height: 50px;
+	/* border-radius: 50%; */
 }
+
