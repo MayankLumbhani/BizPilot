@@ -1,18 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Owner - BizPilot</title>
+  <link rel="shortcut icon" href="../asset/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
   <style>
     /* Override layout for owner (no sidebar) */
-    .main-content { margin-left: 0; }
-    .container { display: block; }
-    .main-wrapper { display: block; }
+    .main-content {
+      margin-left: 0;
+    }
+
+    .container {
+      display: block;
+    }
+
+    .main-wrapper {
+      display: block;
+    }
   </style>
 </head>
+
 <body>
+
+  <nav class="navbar">
+    <!-- Left: Logo + App name -->
+    <div class="navbar-left">
+      <div class="logo">
+        <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+          <!-- Icon -->
+          <rect x="0" y="4" width="32" height="32" rx="8" fill="#2A374A" />
+
+          <!-- Inner B shape -->
+          <path d="M12 12H18C21 12 23 14 23 16C23 18 21 20 18 20H12V12Z
+       M12 20H19C22 20 24 22 24 24C24 26 22 28 19 28H12V20Z" fill="#ffffff" />
+
+          <!-- Signal dot -->
+          <circle cx="24" cy="12" r="2" fill="#ffffff" />
+
+          <!-- Text -->
+          <text x="44" y="26" font-size="18" font-weight="600" fill="#2A374A"
+            font-family="Inter, system-ui, -apple-system, sans-serif">
+            BizPilot
+          </text>
+        </svg>
+
+      </div>
+
+    </div>
+
+    <!-- Right: Date + Notification + Profile -->
+    <div class="navbar-right">
+      <span class="date">Wednesday, Oct 24</span>
+
+      <button class="icon-btn">
+        🔔
+      </button>
+
+      <div class="profile">
+        <span class="avatar">JD</span>
+      </div>
+    </div>
+  </nav>
+
+
   <main id="content" class="main-content">
     <!-- Owner Dashboard (owner-only page; sidebar removed, quick-actions removed) -->
     <section id="ownerDashboard" class="dashboard-section active">
@@ -107,4 +160,5 @@
   <script src="script.js"></script>
   <script src="animations.js"></script>
 </body>
+
 </html>
