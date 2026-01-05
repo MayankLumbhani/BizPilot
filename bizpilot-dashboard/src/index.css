@@ -27,7 +27,6 @@
     @apply bg-bg-light font-sans text-text-primary;
   }
 
-  /* Custom Scrollbar for Webkit */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -43,5 +42,17 @@
   
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-400;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 2px 8px -2px rgba(12, 20, 50, 0.06), 0 1px 3px rgba(12, 20, 50, 0.04);
+  }
+  .shadow-elevated {
+    box-shadow: 0 16px 32px -12px rgba(12, 20, 50, 0.18), 0 12px 24px -14px rgba(12, 20, 50, 0.12);
+  }
+  .shadow-press {
+    box-shadow: 0 4px 10px -4px rgba(12, 20, 50, 0.08), inset 0 0 0 1px rgba(17, 24, 39, 0.04);
   }
 }
