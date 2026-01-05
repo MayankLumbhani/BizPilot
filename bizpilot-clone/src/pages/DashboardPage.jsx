@@ -517,7 +517,7 @@ const DashboardPage = () => {
        </motion.section>
 
         {/* ---- ABOUT SECTION ---- */}
-        <motion.section 
+        {/* <motion.section 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -545,7 +545,7 @@ const DashboardPage = () => {
                       </div>
                  </div>
              </div>
-        </motion.section>
+        </motion.section> */}
 
      </main>
        <div className="bg-white border-t border-gray-200 py-6 text-center text-xs text-muted">

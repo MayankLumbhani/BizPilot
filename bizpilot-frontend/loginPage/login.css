@@ -95,8 +95,18 @@ body {
   color: rgb(71, 85, 105);
 }
 
-.signupText a {
+.signupBtn {
+  background: none;
+  border: none;
   color: rgb(29, 40, 58);
   font-weight: 600;
+  cursor: pointer;
   text-decoration: none;
+  font-size: inherit;
+  display: inline-block;
+  padding: 0;
+}
+
+.signupBtn:hover {
+  opacity: 0.8;
 }

@@ -146,8 +146,18 @@ body {
   color: rgb(71, 85, 105);
 }
 
-.loginText a {
+.loginBtn {
+  background: none;
+  border: none;
   color: rgb(29, 40, 58);
   font-weight: 600;
+  cursor: pointer;
   text-decoration: none;
+  font-size: inherit;
+  display: inline-block;
+  padding: 0;
+}
+
+.loginBtn:hover {
+  opacity: 0.8;
 }

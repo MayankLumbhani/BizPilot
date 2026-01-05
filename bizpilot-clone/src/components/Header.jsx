@@ -88,14 +88,14 @@ const Header = () => {
              </div>
           ) : (
             <>
-              <button className="text-sm font-medium hover:text-primary transition-colors">Sign In</button>
-              <RouterLink to="/dashboard">
+              <RouterLink to="/login" className="text-sm font-medium hover:text-primary transition-colors">Sign In</RouterLink>
+              <RouterLink to="/signup">
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-primary hover:bg-primary-dark text-white text-sm font-medium px-4 py-2 rounded-md transition shadow-md hover:shadow-lg"
                   >
-                    Get Started
+                    Sign Up
                   </motion.button>
               </RouterLink>
             </>
