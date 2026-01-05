@@ -3,7 +3,7 @@ import { Plane, Bell, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 bg-bg-light/80 backdrop-blur-md border-b border-gray-200/50 mb-8 transition-all duration-300">
+    <header className="sticky top-0 z-50 bg-bg-light/80 backdrop-blur-md border-b border-gray-200/50 mb-8 transition-all duration-300 shadow-soft">
       <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
         {/* Logo Area */}
         <div className="flex items-center gap-3">

@@ -8,7 +8,7 @@ const StatCard = ({ title, value, label, subtext, icon: Icon, iconColor, delay =
   const isNeutral = subtext.includes('Same');
 
   return (
-    <DashboardCard delay={delay} className="hover:border-blue-200 transition-colors duration-300">
+    <DashboardCard delay={delay} className="hover:border-blue-200 transition-colors duration-300 hover:shadow-elevated">
       <div className="flex items-start justify-between mb-4">
         <div className={`p-3 rounded-2xl ${iconColor.replace('text-', 'bg-').replace('500', '50')} ${iconColor.replace('text-', 'bg-').replace('600', '50')}`}>
           <Icon className={`w-6 h-6 ${iconColor}`} />

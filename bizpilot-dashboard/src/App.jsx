@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sun, CloudRain, Calendar as CalendarIcon, FileText, ArrowRight, TrendingUp, CheckCircle2, Clock } from 'lucide-react';
+import { Sun, CloudRain, Cloud, Calendar as CalendarIcon, FileText, ArrowRight, TrendingUp, CheckCircle2, Clock } from 'lucide-react';
 import Header from './components/Header';
 import DashboardCard from './components/DashboardCard';
 import StatCard from './components/StatCard';
@@ -156,15 +156,28 @@ function App() {
             </div>
           </DashboardCard>
 
-          {/* Weather Card - Refined */}
-          <DashboardCard className="bg-gradient-to-br from-blue-600 to-blue-700 border-none text-white relative overflow-hidden" delay={0.6}>
-            {/* Background Decorations */}
+          <DashboardCard className="bg-gradient-to-br from-sky-500 to-indigo-700 border-none text-white relative overflow-hidden shadow-elevated" delay={0.6}>
+            <motion.div className="absolute inset-0 pointer-events-none" aria-hidden>
+              <motion.div
+                className="absolute top-10 left-[-100px] opacity-20"
+                animate={{ x: [0, 260] }}
+                transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+              >
+                <Cloud className="w-16 h-16 text-white" />
+              </motion.div>
+              <motion.div
+                className="absolute bottom-8 left-[-80px] opacity-15"
+                animate={{ x: [0, 200] }}
+                transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
+              >
+                <Cloud className="w-12 h-12 text-white" />
+              </motion.div>
+            </motion.div>
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400/20 rounded-full blur-2xl -ml-10 -mb-10 pointer-events-none"></div>
-
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl -ml-10 -mb-10 pointer-events-none"></div>
             <div className="relative z-10 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-8">
-                 <div className="p-2 bg-white/15 rounded-xl backdrop-blur-md border border-white/10 shadow-inner">
+                 <div className="p-2 bg-white/15 rounded-xl backdrop-blur-md border border-white/10">
                     <Sun className="w-5 h-5 text-yellow-300" />
                  </div>
                  <h3 className="font-bold text-white text-lg tracking-wide">Weather</h3>
