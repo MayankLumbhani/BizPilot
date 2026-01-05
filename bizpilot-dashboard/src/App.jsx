@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, CloudRain, Cloud, Calendar as CalendarIcon, FileText, ArrowRight, TrendingUp, CheckCircle2, Clock } from 'lucide-react';
 import Header from './components/Header';
@@ -18,6 +18,34 @@ const containerVariants = {
 };
 
 function App() {
+  var [temp, setTemp] = useState(0);
+  var [city, setCity] = useState("Loading...");
+  var [feedback1, setFeed1] = useState("Loading...");
+  var [feedback2, setFeed2] = useState("Loading...");
+
+  useEffect(()=> {
+     fetch(`http://api.weatherapi.com/v1/current.json?key=2182b7f344344969ac151627250912&q=kalol&aqi=ye`)
+        .then((resp) => resp.json())
+        .then((details) => {
+            setCity(details.location.name + ", " + details.location.region);
+            setTemp(details.current.temp_c);
+            if (details.current.feelslike_c < 18) {
+              setFeed1("Cold Weather ❄️");
+            } else if (details.current.feelslike_c < 28) {
+              setFeed1("Pleasant Weather 😌");
+            } else {
+              setFeed1("Hot Weather 🔥");
+            }
+
+            if (details.current.cloud > 60) {
+                setFeed2("Cloudy / Overcast ☁️");
+            }
+            else {
+                setFeed2("Sunny Weather ☀️");
+            }
+
+        })
+  },[])
   return (
     <div className="min-h-screen bg-bg-light pb-20">
       <Header />
@@ -185,9 +213,10 @@ function App() {
               
               <div className="mt-auto flex items-end justify-between">
                 <div>
-                  <div className="text-6xl font-bold text-white mb-2 tracking-tighter">72°</div>
-                  <div className="text-lg font-medium text-blue-100">San Francisco</div>
-                  <div className="text-sm text-blue-200 font-medium mt-1">Clear Sky</div>
+                  <div className="text-6xl font-bold text-white mb-2 tracking-tighter">{temp}°C</div>
+                  <div className="text-lg font-medium text-blue-100">{city}</div>
+                  <div className="text-sm text-blue-200 font-medium mt-1">{feedback1}</div>
+                  <div className="text-sm text-blue-200 font-medium mt-1">{feedback2}</div>
                 </div>
                 
                 <motion.div
@@ -204,6 +233,7 @@ function App() {
                    <Sun className="w-20 h-20 text-yellow-300 drop-shadow-[0_0_15px_rgba(253,224,71,0.5)]" />
                 </motion.div>
               </div>
+
             </div>
           </DashboardCard>
 
