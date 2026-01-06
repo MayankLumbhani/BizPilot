@@ -4,7 +4,7 @@ import { Sun, CloudRain, Cloud, Calendar as CalendarIcon, FileText, ArrowRight, 
 import Header from './components/Header';
 import DashboardCard from './components/DashboardCard';
 import StatCard from './components/StatCard';
-import { statsData, salesData, followUpData, briefingData } from './data/mockData';
+import { statsData, followUpData, briefingData } from './data/mockData';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,8 +22,15 @@ function App() {
   var [city, setCity] = useState("Loading...");
   var [feedback1, setFeed1] = useState("Loading...");
   var [feedback2, setFeed2] = useState("Loading...");
+  const [sales, setSales] = useState(0);
+  const [expenses, setExpenses] = useState(0);
 
   useEffect(()=> {
+     fetchWeather();
+     fetchTransactions();
+  },[])
+
+  const fetchWeather = () => {
      fetch(`http://api.weatherapi.com/v1/current.json?key=2182b7f344344969ac151627250912&q=kalol&aqi=ye`)
         .then((resp) => resp.json())
         .then((details) => {
@@ -45,7 +52,20 @@ function App() {
             }
 
         })
-  },[])
+  }
+
+  const fetchTransactions = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/transactions');
+      const data = await res.json();
+      const salesTotal = data.filter(t => t.type === 'sale').reduce((sum, t) => sum + t.amount, 0);
+      const expensesTotal = data.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+      setSales(salesTotal);
+      setExpenses(expensesTotal);
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+    }
+  };
   return (
     <div className="min-h-screen bg-bg-light pb-20">
       <Header />
@@ -94,7 +114,7 @@ function App() {
               {/* Net Income Display */}
               <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                  <div className="text-sm text-text-secondary font-medium mb-1">Net Income</div>
-                 <div className="text-3xl font-bold text-gray-900">{salesData.net}</div>
+                 <div className="text-3xl font-bold text-gray-900">${sales - expenses}</div>
                  <div className="flex items-center gap-1 mt-2 text-sm text-accent-green font-medium">
                    <TrendingUp className="w-4 h-4" />
                    <span>+12.5% from last month</span>
@@ -106,20 +126,23 @@ function App() {
                 <div className="flex justify-between items-center p-3 hover:bg-gray-50 rounded-xl transition-colors cursor-default group">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-accent-green"></div>
-                    <span className="text-text-secondary font-medium">{salesData.sales.label}</span>
+                    <span className="text-text-secondary font-medium">Sales</span>
                   </div>
-                  <span className="text-gray-900 font-bold group-hover:scale-105 transition-transform">
-                     {salesData.sales.value}
-                  </span>
+                  <div className="text-right">
+                     <div className="font-bold text-gray-900">${sales}</div>
+                     <div className="text-xs text-text-secondary group-hover:text-gray-700 transition-colors">+8.2% vs last month</div>
+                  </div>
                 </div>
+
                 <div className="flex justify-between items-center p-3 hover:bg-gray-50 rounded-xl transition-colors cursor-default group">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent-red"></div>
-                    <span className="text-text-secondary font-medium">{salesData.expenses.label}</span>
+                    <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                    <span className="text-text-secondary font-medium">Expenses</span>
                   </div>
-                  <span className="text-gray-900 font-bold group-hover:scale-105 transition-transform">
-                     {salesData.expenses.value}
-                  </span>
+                  <div className="text-right">
+                     <div className="font-bold text-gray-900">${expenses}</div>
+                     <div className="text-xs text-text-secondary group-hover:text-gray-700 transition-colors">-2.1% vs last month</div>
+                  </div>
                 </div>
               </div>
             </div>
