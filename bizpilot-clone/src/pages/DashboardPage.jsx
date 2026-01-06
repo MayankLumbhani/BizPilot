@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { FiPlus, FiExternalLink, FiDownload, FiSave } from 'react-icons/fi';
 import { motion } from 'framer-motion';
@@ -56,6 +56,49 @@ const Badge = ({ type, children }) => {
 
 
 const DashboardPage = () => {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState({ title: '', dueDate: '', priority: 'normal' });
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/tasks');
+      const data = await res.json();
+      setTasks(data);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
+  };
+
+  const handleAddTask = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:5000/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newTask)
+      });
+      if (res.ok) {
+        setNewTask({ title: '', dueDate: '', priority: 'normal' });
+        fetchTasks(); // refresh
+      }
+    } catch (error) {
+      console.error('Error adding task:', error);
+    }
+  };
+
+  const handleDeleteTask = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/tasks/${id}`, { method: 'DELETE' });
+      fetchTasks();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col font-sans">
       <Header />
@@ -118,32 +161,32 @@ const DashboardPage = () => {
                 {/* Add New Task Form */}
                 <div className="lg:col-span-1 bg-white p-6 rounded-xl border border-gray-100">
                     <h3 className="font-semibold mb-4">Add New Task</h3>
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleAddTask}>
                         <div>
                             <label className="block text-xs font-medium text-muted mb-1">Task Title</label>
-                            <input type="text" className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary" placeholder="e.g., Prepare monthly report" />
+                            <input type="text" value={newTask.title} onChange={(e) => setNewTask({...newTask, title: e.target.value})} className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary" placeholder="e.g., Prepare monthly report" required />
                         </div>
                          <div>
                             <label className="block text-xs font-medium text-muted mb-1">Description</label>
-                            <textarea className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary h-24 resize-none" placeholder="Add details..."></textarea>
+                            <textarea value={newTask.description} onChange={(e) => setNewTask({...newTask, description: e.target.value})} className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary h-24 resize-none" placeholder="Add details..."></textarea>
                         </div>
                          <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-xs font-medium text-muted mb-1">Due Date</label>
-                                <input type="date" className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary" />
+                                <input type="date" value={newTask.dueDate} onChange={(e) => setNewTask({...newTask, dueDate: e.target.value})} className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary" />
                             </div>
                              <div>
                                 <label className="block text-xs font-medium text-muted mb-1">Priority</label>
-                                <select className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary bg-white">
-                                    <option>High</option>
-                                    <option>Medium</option>
-                                    <option>Low</option>
+                                <select value={newTask.priority} onChange={(e) => setNewTask({...newTask, priority: e.target.value})} className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-primary bg-white">
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
                                 </select>
                             </div>
                          </div>
                          <div className="flex justify-end gap-3 pt-2">
-                             <button type="button" className="text-muted text-sm hover:text-dark transition">Clear</button>
-                             <button type="button" className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-dark transition flex items-center gap-2"><FiSave size={14}/> Save Task</button>
+                             <button type="button" onClick={() => setNewTask({ title: '', description: '', dueDate: '', priority: 'normal' })} className="text-muted text-sm hover:text-dark transition">Clear</button>
+                             <button type="submit" className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-dark transition flex items-center gap-2"><FiSave size={14}/> Save Task</button>
                          </div>
                     </form>
                 </div>
@@ -162,24 +205,14 @@ const DashboardPage = () => {
                                  </tr>
                              </thead>
                              <tbody>
-                                <motion.tr whileHover={{ backgroundColor: "#f9fafb", x: 4 }} className="bg-white border-b border-gray-50 transition cursor-default">
-                                    <td className="px-4 py-4 font-medium text-dark">Prepare Monthly Tax Report</td>
-                                    <td className="px-4 py-4">Today</td>
-                                    <td className="px-4 py-4"><Badge type="high">High</Badge></td>
-                                    <td className="px-4 py-4 text-right"><Badge type="inprogress">In Progress</Badge></td>
-                                </motion.tr>
-                                <motion.tr whileHover={{ backgroundColor: "#f9fafb", x: 4 }} className="bg-white border-b border-gray-50 transition cursor-default">
-                                    <td className="px-4 py-4 font-medium text-dark">Client Meeting with Acme Corp</td>
-                                    <td className="px-4 py-4">Tomorrow</td>
-                                    <td className="px-4 py-4"><Badge type="medium">Medium</Badge></td>
-                                    <td className="px-4 py-4 text-right"><Badge type="scheduled">Scheduled</Badge></td>
-                                </motion.tr>
-                                <motion.tr whileHover={{ backgroundColor: "#f9fafb", x: 4 }} className="bg-white transition cursor-default">
-                                    <td className="px-4 py-4 font-medium text-dark">Update Website Landing Page</td>
-                                    <td className="px-4 py-4">Oct 24, 2025</td>
-                                    <td className="px-4 py-4"><Badge type="low">Low</Badge></td>
-                                    <td className="px-4 py-4 text-right"><Badge type="waiting">Waiting</Badge></td>
-                                </motion.tr>
+                                {tasks.map(task => (
+                                  <motion.tr key={task.id} whileHover={{ backgroundColor: "#f9fafb", x: 4 }} className="bg-white border-b border-gray-50 transition cursor-default">
+                                    <td className="px-4 py-4 font-medium text-dark">{task.title}</td>
+                                    <td className="px-4 py-4">{task.dueDate ? new Date(task.dueDate.seconds * 1000).toLocaleDateString() : 'No date'}</td>
+                                    <td className="px-4 py-4"><Badge type={task.priority}>{task.priority}</Badge></td>
+                                    <td className="px-4 py-4 text-right"><Badge type={task.status}>{task.status}</Badge></td>
+                                  </motion.tr>
+                                ))}
                             </tbody>
                          </table>
                      </div>
