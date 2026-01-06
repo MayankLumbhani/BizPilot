@@ -4,15 +4,16 @@ const clientRoutes = require("./routes/clients");
 const db = require("./firebase");
 const taskRoutes = require("./routes/tasks");
 const transactionRoutes = require("./routes/transactions");
+const userRoutes = require("./routes/users");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
 app.use("/tasks", taskRoutes);
 app.use("/clients", clientRoutes);
 app.use("/transactions", transactionRoutes);
+app.use("/users", userRoutes);
 
 
 app.get("/", (req, res) => {
